@@ -31,8 +31,11 @@
     - we install busybox
     - we build the image: `docker build -t alpine-busybox .`
 
-## Docker image with Quagga, Busybox, services BGPD, OSFPD and IS-IS active 
+## Docker image with FRR, Busybox, services BGPD, OSFPD and IS-IS active 
 
+    # FRR
+    FRR (Free Range Routing) is an open-source routing software suite providing a comprehensive suite of routing protocols. It is a fork of Quagga, developed to incorporate modern network requirements and features faster.
+    
     # Services
     ## OSPF 
     - it is typically used within an Autonomous System (AS) to manage routing inside the network. It is an interior gateway protocol (IGP) and is very efficient for handling internal network routing.
