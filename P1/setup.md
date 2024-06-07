@@ -74,6 +74,17 @@ FRR (Free Range Routing) is an open-source routing software suite providing a co
 
 <br><br><br><br>
 
+## Launch GNS3
+
+- In GNS3 in the "Edit" menu click on "Preferences" and then select "Docker" from the left-hand menu.
+- Click on the "Docker containers" tab and then click "New".
+- provide a name for the host container and select the Docker image  from the dropdown menu.
+Click "OK" to add the Host Docker container to GNS3.
+<br>
+- for the router:
+
+<br><br><br><br>
+
 # Previous project version
 
 ## Quagga install (used at the beginning of the project and then replaced by frr)
