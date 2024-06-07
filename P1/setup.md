@@ -1,5 +1,21 @@
 # P1
 
+## Content Tree
+```
+├── P1
+│   ├── host
+│   │   └── Dockerfile
+│   ├── router
+│   │   └── Dockerfile
+│   ├── setup_build_run_images.sh
+│   └── setup.md
+```
+# Fast way
+- exec the script: setup_build_run_images.sh
+- it will check if GNS3 and Docker are installed and will build and run the host and the router
+
+# Manual way
+
 ## Install GNS3 on VM (Ubuntu 22.04 in our case)
 - install Depepndencies:
     ```
