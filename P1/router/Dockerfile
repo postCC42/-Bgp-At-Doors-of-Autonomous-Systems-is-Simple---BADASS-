@@ -1,5 +1,5 @@
 
-FROM frrouting/frr:v8.4.0
+FROM frrouting/frr:v8.4.1
 
 RUN apk add --no-cache busybox
 
