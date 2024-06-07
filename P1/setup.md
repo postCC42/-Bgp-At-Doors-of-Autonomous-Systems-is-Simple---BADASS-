@@ -24,7 +24,7 @@
 
 ## Docker image with busybox
     ## Busybox
-    -
+    - BusyBox is a software suite commonly used in embedded systems and Unix-like operating systems. It provides several stripped-down Unix tools bundled into a single executable file, reducing the footprint and resource requirements of the system.
 
     ## Steps
     - we create a Dockerfile with a light distro (Alpine)
@@ -49,10 +49,16 @@
         - OSPF [ref](https://www.nongnu.org/quagga/docs/docs-multi/OSPF-Configuration-Examples.html)
         - ISIS [ref](https://www.nongnu.org/quagga/docs/docs-multi/ISIS-Configuration-Examples.html)
     - we add the instructions in the Dockerfile to copy the conf within the image for it to be parsed
+    - build the docker image: `docker build -t quagga-routing .`
 
     # Services
     ## OSPF 
     - it is typically used within an Autonomous System (AS) to manage routing inside the network. It is an interior gateway protocol (IGP) and is very efficient for handling internal network routing.
     ## BGP
     - is used to route between different Autonomous Systems. It is an exterior gateway protocol (EGP) and is primarily used for managing how packets are routed across the internet and between large networks.
+    ## IS-IS
+    - ISIS (Intermediate System to Intermediate System) is a routing protocol used in computer networks, particularly within Internet Service Provider (ISP) networks. It is designed to route IP packets efficiently within a large and complex network, providing fast convergence and scalability
+
+    # Why OSPF, BGP and IS-IS together in this project ?
+    - Each protocol serves different functions in a network. OSPF is typically used for internal routing within an Autonomous System (AS), BGP is used for routing between different ASes, and ISIS can provide additional routing capabilities or act as an alternative to OSPF. Having all three protocols integrated allows for a comprehensive routing soluti
 
