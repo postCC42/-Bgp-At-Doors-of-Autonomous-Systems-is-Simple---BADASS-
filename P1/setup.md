@@ -5,13 +5,18 @@
 ├── P1
 │   ├── host
 │   │   └── Dockerfile
+│   ├── install_gns3_docker.sh
+│   ├── launch_images.sh
+│   ├── P1_network.gns3project
 │   ├── router
 │   │   └── Dockerfile
-│   ├── setup_build_run_images.sh
 │   └── setup.md
+
 ```
 # Fast way
-- exec the script: setup_build_run_images.sh
+- exec the script: `install_gns3_docker.sh`
+- exit the shell and log back in again to the current user to be set in docker groups definitely
+- exec the script: `launch_images.sh`
 - it will check if GNS3 and Docker are installed and will build and run the host and the router
 - open GNS3 via shell: `gns3`
 
