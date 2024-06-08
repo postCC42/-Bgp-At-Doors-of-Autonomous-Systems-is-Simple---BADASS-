@@ -22,7 +22,8 @@ if ! command_exists docker; then
     sudo systemctl start docker
     sudo systemctl enable docker
     sudo usermod -aG docker $USER
-    echo -e "\e[5mDocker installed. Please log out and log back in for the changes to take effect.\e[0m"
+    newgrp docker # Apply the new group membership without logging out
+    echo "Docker installed."
 else
     echo "Docker is already installed."
 fi
