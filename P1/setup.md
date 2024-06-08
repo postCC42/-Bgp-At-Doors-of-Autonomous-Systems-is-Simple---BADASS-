@@ -13,8 +13,9 @@
 # Fast way
 - exec the script: setup_build_run_images.sh
 - it will check if GNS3 and Docker are installed and will build and run the host and the router
+- open GNS3 via shell: `gns3`
 
-# Manual way
+# Long way
 
 ## Install GNS3 on VM (Ubuntu 22.04 in our case)
 - install Depepndencies:
