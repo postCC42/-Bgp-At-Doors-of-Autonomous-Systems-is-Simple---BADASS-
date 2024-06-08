@@ -15,6 +15,7 @@
 ```
 # Fast way
 - exec the script: `install_gns3_docker.sh`
+- when prompt for gns3 non superuser privileges on gns3, **choose "yes" 2 times** (non superuser can run gns3 and intercept packets)
 - exit the shell and log back in again to the current user to be set in docker groups definitely
 - exec the script: `launch_images.sh`
 - it will check if GNS3 and Docker are installed and will build and run the host and the router
