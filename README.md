@@ -1,4 +1,11 @@
 # Bgp At Doors of Autonomous Systems is Simple ( BADASS )
+
+### Walkthrough
+- [P1](P1/setup.md)
+- [P2](P2/setup.md)
+<br><br>
+
+### Overview
 - for an overview of how Routing Tables work: `show ip route`: [ref](https://www.youtube.com/watch?v=uKiM9-tGuc4)
 - for an overview on routing, the funniest and easier to understand we find: [here](https://www.youtube.com/watch?v=kyMoEgdMbH8)
 
