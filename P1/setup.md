@@ -6,7 +6,7 @@
 │   ├── host
 │   │   └── Dockerfile
 │   ├── install_gns3_docker.sh
-│   ├── launch_images.sh
+│   ├── build_images.sh
 │   ├── P1_network.gns3project
 │   ├── router
 │   │   └── Dockerfile
@@ -14,12 +14,13 @@
 
 ```
 # Fast way
+- create a VM with Ubuntu 22.04 or 24.04 as OS
 - exec the script: `install_gns3_docker.sh`
 - when prompt for gns3 non superuser privileges on gns3, **choose "yes" 2 times** (non superuser can run gns3 and intercept packets)
-- exit the shell and log back in again to the current user to be set in docker groups definitely
-- exec the script: `launch_images.sh`
-- it will check if GNS3 and Docker are installed and will build and run the host and the router
+- exec the script: `build_images.sh`
+- it will build the host and the router images
 - open GNS3 via shell: `gns3`
+- import project `P1.gns3project`
 
 # Long way
 
