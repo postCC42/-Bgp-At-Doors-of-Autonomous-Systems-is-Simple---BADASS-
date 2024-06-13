@@ -1,8 +1,18 @@
 # P2
 
+## Content tree
+```
+├── P2
+│   ├── 1_setup_static_vxlan.sh
+│   ├── 2_setup_dynamic_vxlan.sh
+│   ├── get_mac_address.sh
+│   ├── P2.gns3project
+│   └── setup.md
+
+```
 - we create a switch ethernet (8 ports by default)
 - we add 2 routers (update adapters to 2)
-- we add 2 hosts
+- we add 2 hosts (2 adapters to work with eth1 as requested)
 
 [tuto](https://www.youtube.com/watch?v=u1ka-S6F9UI)
 
@@ -14,26 +24,26 @@ before going further let's summarize the state of the network created until now:
 - Devices in different VLANs can communicate through routers that route traffic between VLANs based on their IP addresses and MAC addresses(based on MAC address tables).
 - we need VXLAN, that create a virtual layer 2 and incapsulate layer 2 frame into layer 3 packets on a large scale thanks to its 24 bit VNI that allow up to 16 million VXLAN segments, keeping the isolation of each vxlan
 
-- hosts
-    - launch the network (play button)
-    - click on auxiliary console on the host
-    - `ip a` allows us to check the network interfaces in the newly created machine.
-        - `lo` : Loopback Interface
-        The loopback interface is a special, virtual network interface that a computer uses to communicate with itself. It is primarily used for testing and network management purposes. 
-        - `eth0` Ethernet Interface
-        - `eth1` Ethernet Interface
-        An Ethernet interface is a physical network interface used to connect a computer to a local area network (LAN). It is one of the most common types of network interfaces used in wired networking.
-    - we assign the IP address 30.1.1.1 or 30.1.1.2 for host 2 to the network interface eth1.
-    - The /24 subnet mask indicates that the network portion of the IP address is 30.1.1, allowing for 256 addresses (from 30.1.1.0 to 30.1.1.255), where 30.1.1.0 is the network address and 30.1.1.255 is the broadcast address.
+## set up hosts
+- launch the network (play button)
+- click on auxiliary console on the host
+- `ip a` allows us to check the network interfaces in the newly created machine.
+    - `lo` : Loopback Interface
+    The loopback interface is a special, virtual network interface that a computer uses to communicate with itself. It is primarily used for testing and network management purposes. 
+    - `eth0` Ethernet Interface
+    - `eth1` Ethernet Interface
+    An Ethernet interface is a physical network interface used to connect a computer to a local area network (LAN). It is one of the most common types of network interfaces used in wired networking.
+- we assign the IP address 30.1.1.1 or 30.1.1.2 for host 2 to the network interface eth1.
+- The /24 subnet mask indicates that the network portion of the IP address is 30.1.1, allowing for 256 addresses (from 30.1.1.0 to 30.1.1.255), where 30.1.1.0 is the network address and 30.1.1.255 is the broadcast address.
 
-    ```
-    ip addr add 30.1.1.1/24 dev eth1
-    ```
-    - we do the same for host_2, assigning the IP address 30.1.1.2/24
-- routers
-    - `ip addr add 10.1.1.1/24 dev eth0` in router 1 toward switch (eth0)
-    - `ip addr add 10.1.1.2/24 dev eth0` in router 2 toward switch (eth0)
-    NB: The 10.0.0.0/8 block is designated for private use (RFC 1918), which means any IP address in the range 10.0.0.0 to 10.255.255.255 can be used within a private network without conflicting with other networks
+```
+ip addr add 30.1.1.1/24 dev eth1
+```
+- we do the same for host_2, assigning the IP address 30.1.1.2/24
+## set up routers
+- `ip addr add 10.1.1.1/24 dev eth0` in router 1 toward switch (eth0)
+- `ip addr add 10.1.1.2/24 dev eth0` in router 2 toward switch (eth0)
+NB: The 10.0.0.0/8 block is designated for private use (RFC 1918), which means any IP address in the range 10.0.0.0 to 10.255.255.255 can be used within a private network without conflicting with other networks
 ## Static VXLAN setup
 - vxlan tunnel between the 2 routers
     - we `ip link add name vxlan10 type vxlan id 10 local 10.1.1.1 remote 10.1.1.2 dstport 4789 dev eth0` (local and remote have to be inversed for router 2):
@@ -42,7 +52,7 @@ before going further let's summarize the state of the network created until now:
         - `id 10`: The VXLAN Network Identifier (VNI), which is a unique identifier for the VXLAN segment, as the exercise requests
         - `remote 10.1.1.2` or `remote 10.1.1.1`: This is the IP address of the remote VXLAN endpoint, which is the IP address of the opposite router eth0 interface (toward switch).
         - `dstport 4789`: This specifies the UDP port used for VXLAN communication, with 4789 being the IANA-assigned default port for VXLAN.
-        <!-- - `dev eth0`: This specifies the local network interface to be used for the VXLAN tunnel. We tell router 1 to use its own eth0 interface (with IP 10.1.1.1/24) to send VXLAN packets towards the remote endpoint at 10.1.1.2. -->
+        - `dev eth0`: This specifies the local network interface to be used for the VXLAN tunnel. We tell router 1 to use its own eth0 interface (with IP 10.1.1.1/24) to send VXLAN packets towards the remote endpoint at 10.1.1.2.
     - then we activate the vxlan: `ip link set dev vxlan10 up`
     - then we need to set a bridge (bridges are used to connect multiple network interfaces together at Layer 2, allowing them to communicate as if they were part of a single network segment):
     ```
