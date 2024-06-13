@@ -21,6 +21,7 @@
 - it will build the host and the router images
 - open GNS3 via shell: `gns3`
 - import project `P1.gns3project`
+- click play button to activate network on gns3 (it will run the image creating the containers)
 
 # Long way
 
