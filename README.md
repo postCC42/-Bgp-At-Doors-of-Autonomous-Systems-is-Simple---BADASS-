@@ -1,19 +1,19 @@
 # Bgp At Doors of Autonomous Systems is Simple ( BADASS )
 
-### Walkthrough
+## Walkthrough
 - [P1](P1/setup.md)
 - [P2](P2/setup.md)
 <br><br>
 
-### Overview
+## Overview
 - for an overview of how Routing Tables work: `show ip route`: [ref](https://www.youtube.com/watch?v=uKiM9-tGuc4)
 - for an overview on routing, the funniest and easier to understand we find: [here](https://www.youtube.com/watch?v=kyMoEgdMbH8)
 
-## AUTONOMOUS SYSTEMS (AS)
+### AUTONOMOUS SYSTEMS (AS)
 - A collection of IP networks and routers under the control of a single organization that presents a common routing policy to the internet.
 
-## LAN, VLAN, VXLAN, AS
-### key differences
+### LAN, VLAN, VXLAN, AS
+**Key differences**
 - LAN vs. VLAN:
 
   - LAN: Physical network connecting devices within a limited area.
