@@ -1,5 +1,7 @@
 # Bgp At Doors of Autonomous Systems is Simple ( BADASS )
 
+## Important
+- this project scripts are tested on VM VMWare running Ubuntu 24.04 or 22.04 as OS
 ## Walkthrough
 - [P1](P1/setup.md)
 - [P2](P2/setup.md)
