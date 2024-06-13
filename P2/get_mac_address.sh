@@ -12,6 +12,15 @@ if [[ ! -z $running_containers ]]; then
     
     # Retrieve network interfaces and MAC addresses
     docker exec $container_id sh -c "ip link show | awk '/^[0-9]+: / {iface=\$2} /ether/ {print iface, \$2}'"
+    
+    # Output the MAC address table if the bridge br0 exists
+    if docker exec $container_id sh -c "brctl showmacs br0" &> /dev/null; then
+      echo "MAC address table for br0:"
+      docker exec $container_id sh -c "brctl showmacs br0"
+    else
+      echo "No bridge br0 found in this container"
+    fi
+    
     echo "---------------------------"
   done
   exit 0
