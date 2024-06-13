@@ -55,7 +55,6 @@
 - we create a Dockerfile with a light distro (Alpine)
 - we install busybox
 - we build the image: `docker build -t host_mpagani .`
-<!-- - we run the image `docker run -d --name host_mpagani host-mpagani` -->
 
 <br><br><br><br>
 ## ROUTER: Docker image with FRR, Busybox, services BGPD, OSFPD and IS-IS active 
@@ -77,7 +76,6 @@ FRR (Free Range Routing) is an open-source routing software suite providing a co
 - add instruction to install busybox
 - add instruction to replace in the daemon conf file the activation state of bgp ospf isis daemons with "yes"
 - `docker build -t router-mpagani .`
-- `docker run -d --name router router-mpagani`
 - to check if services are running within the container: `dokcer exec -it router bash`, then `ps aux` and `| grep` the services
 
 <br><br><br><br>
