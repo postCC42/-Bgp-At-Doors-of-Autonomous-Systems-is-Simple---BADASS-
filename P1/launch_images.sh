@@ -20,14 +20,22 @@ else
 fi
 
 
-echo "Building and running host_${login}..."
+echo "Building host_${login}..."
 cd host
-docker build -t host_${login} .
-docker run -d --name host -d host_${login}
+if docker build -t host_${login} .; then
+    echo "Host image built successfully."
+else
+    echo "Error: Failed to build host_${login}."
+    exit 1
+fi
 
-echo "Building and running router_${login}..."
+echo "Building router_${login}..."
 cd ../router
-docker build -t router_${login} .
-docker run --name router -d --rm router_${login}
+if docker build -t router_${login} .; then
+    echo "Router image built successfully."
+else
+    echo "Error: Failed to build router_${login}."
+    exit 1
+fi
 
-echo "Both Host and Router containers are up and running."
+echo "Both Host and Router images are built for gns3 to run them."
