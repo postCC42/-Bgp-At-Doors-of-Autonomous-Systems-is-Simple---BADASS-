@@ -54,7 +54,7 @@
 - we create a Dockerfile with a light distro (Alpine)
 - we install busybox
 - we build the image: `docker build -t host_mpagani .`
-- we run the image `docker run -d --name host_mpagani host-mpagani`
+<!-- - we run the image `docker run -d --name host_mpagani host-mpagani` -->
 
 <br><br><br><br>
 ## ROUTER: Docker image with FRR, Busybox, services BGPD, OSFPD and IS-IS active 
