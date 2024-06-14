@@ -79,10 +79,11 @@ if [[ ! -z $running_containers ]]; then
     read -p $'\n'"Do you want to check the multicast group memberships in $hostname? (y/n): " choice
 
     if [[ $choice == "y" ]]; then
-      echo -e "As a confirmation that eth0 successfully joined the 239.1.1.1 group to receive VXLAN encapsulated frames from other VXLAN endpoints,"
-      echo "executing the command 'ip maddr show' for router $hostname:"
+      echo -e "executing the command ${GREEN}ip maddr show${NC} for router $hostname:"
       docker exec $container_id sh -c "ip maddr show"
-      echo -e "\n${GREEN}Command executed.${NC}"
+      echo -e "\n"
+      echo -e "executing the command ${GREEN}ip -d link show vxlan10${NC}"
+      docker exec $container_id sh -c "ip -d link show vxlan10"
     fi
   done
   echo "\n"
