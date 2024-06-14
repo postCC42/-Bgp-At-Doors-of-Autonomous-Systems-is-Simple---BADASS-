@@ -38,9 +38,17 @@ if [[ ! -z $running_containers ]]; then
         docker exec $container_id sh -c "ip link show | awk '/^[0-9]+: / {iface=\$2} /ether/ {print iface, \$2}'"
         # Assign IP address based on hostname
         if [[ $hostname == "router_mpagani-1" ]]; then
+
+
+
+
+
           echo "Attempting to assign IP address 10.1.1.1/24 to eth0..."
           docker exec $container_id sh -c "ip addr add 10.1.1.1/24 dev eth0" && echo -e "${GREEN}Success: Assigned IP address 10.1.1.1/24 to eth0${NC}" || echo "Error: Failed to assign IP address 10.1.1.1/24 to eth0"
           
+          echo "Attempting to assign IP address 30.1.1.3/24 to eth1..."
+          docker exec $container_id sh -c "ip addr add 30.1.1.3/24 dev eth1" && echo -e "${GREEN}Success: Assigned IP address 30.1.1.3/24 to eth1${NC}" || echo "Error: Failed to assign IP address 30.1.1.3/24 to eth1"
+
           echo "Attempting to create VXLAN interface vxlan10..."
           docker exec $container_id sh -c "ip link add name vxlan10 type vxlan id 10 local 10.1.1.1 remote 10.1.1.2 dstport 4789 dev eth0" && echo -e "${GREEN}Success: Created VXLAN vxlan10${NC}" || echo "Error: Failed to create VXLAN vxlan10"
           
@@ -59,9 +67,18 @@ if [[ ! -z $running_containers ]]; then
           echo "Attempting to add vxlan10 to bridge br0..."
           docker exec $container_id sh -c "brctl addif br0 vxlan10" && echo -e "${GREEN}Success: Added vxlan10 to bridge br0${NC}" || echo "Error: Failed to add vxlan10 to bridge br0"
         elif [[ $hostname == "router_mpagani-2" ]]; then
+         
+         
+         
+         
+         
+         
           echo "Attempting to assign IP address 10.1.1.2/24 to eth0..."
           docker exec $container_id sh -c "ip addr add 10.1.1.2/24 dev eth0" && echo -e "${GREEN}Success: Assigned IP address 10.1.1.2/24 to eth0${NC}" || echo "Error: Failed to assign IP address 10.1.1.2/24 to eth0"
           
+          echo "Attempting to assign IP address 30.1.1.4/24 to eth1..."
+          docker exec $container_id sh -c "ip addr add 30.1.1.4/24 dev eth1" && echo -e "${GREEN}Success: Assigned IP address 30.1.1.4/24 to eth1${NC}" || echo "Error: Failed to assign IP address 30.1.1.4/24 to eth1"
+
           echo "Attempting to create VXLAN interface vxlan10..."
           docker exec $container_id sh -c "ip link add name vxlan10 type vxlan id 10 local 10.1.1.2 remote 10.1.1.1 dstport 4789 dev eth0" && echo -e "${GREEN}Success: Created VXLAN vxlan10" || echo "Error: Failed to create VXLAN vxlan10"
           
