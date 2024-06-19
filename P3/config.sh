@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# to be executed after having imported the P2.gns3project into gns3 and activated the network with play button (this creates the container on VM)
+# to be executed after having imported the P3.gns3project into gns3 and activated the network with play button (this creates the container on VM)
 
 GREEN='\033[1;92m'
 YELLOW='\033[1;93m'
