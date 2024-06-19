@@ -23,6 +23,14 @@ before going further let's summarize the state of the network created until now:
 - Routing between VLANs (inter-VLAN routing) typically requires Layer 3 routing devices (routers or Layer 3 switches, that use ip addresses).
 - Devices in different VLANs can communicate through routers that route traffic between VLANs based on their IP addresses and MAC addresses(based on MAC address tables).
 - we need VXLAN, that create a virtual layer 2 and incapsulate layer 2 frame into layer 3 packets on a large scale thanks to its 24 bit VNI that allow up to 16 million VXLAN segments, keeping the isolation of each vxlan
+Focus on why we need a bridge:
+- VXLAN is designed to extend Layer 2 networks over a Layer 3 infrastructure. Each router (or more specifically, each VXLAN Tunnel Endpoint - VTEP) acts as a bridge to encapsulate and decapsulate Ethernet frames into VXLAN packets. This encapsulation allows traditional Layer 2 Ethernet frames to be transported across an IP network.
+
+- VXLAN Tunneling: 
+The bridge functionality in VTEPs enables the creation of VXLAN tunnels. These tunnels are used to transport Layer 2 traffic over a Layer 3 network. The VTEP bridges the gap between the local Layer 2 domain and the VXLAN tunnel, allowing devices in different Layer 2 domains to communicate as if they were on the same local network.
+
+- MAC Address Learning and Management: 
+Bridges in VTEPs are responsible for MAC address learning and management. They maintain a MAC address table that maps MAC addresses to VXLAN tunnels, allowing them to forward traffic to the correct destination VTEP. This is similar to traditional Ethernet bridging but adapted to handle the encapsulated VXLAN traffic.
 
 ## set up hosts
 - launch the network (play button)
