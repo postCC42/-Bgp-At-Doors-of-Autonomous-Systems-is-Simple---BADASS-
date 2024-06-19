@@ -48,6 +48,15 @@ if [[ ! -z $running_containers ]]; then
                 # Execute the configuration file
                 docker exec $container_id vtysh -f /tmp/router.conf && echo -e "${GREEN}Success: Configured router $hostname${NC}" || echo "Error: Failed to configure router $hostname"
             elif [[ $hostname == "router_mpagani-2" ]]; then
+                 docker exec $container_id sh -c "
+                    ip link add name vxlan10 type vxlan id 10 dev eth0 dstport 4789
+                    ip link set dev vxlan10 up
+                    ip link add name br0 type bridge
+                    ip link set dev br0 up
+                    brctl addif br0 eth1
+                    brctl addif br0 vxlan10
+                "
+                echo -e "${GREEN}Success: Configured VXLAN and bridge for $hostname${NC}"
                  # Copy configuration file to the container
                 docker cp $CONFIG_FILE_ROUTER_2 $container_id:/tmp/router.conf
                 # Execute the configuration file
