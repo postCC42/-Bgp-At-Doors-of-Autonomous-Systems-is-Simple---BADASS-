@@ -7,6 +7,8 @@ GREEN='\033[1;92m'
 YELLOW='\033[1;93m'
 NC='\033[0m' # No Color
 
+$CONFIG_FILE_ROUTER_1="router_1.conf"
+
 # Get the list of running Docker container IDs
 running_containers=$(docker ps -q)
 
@@ -38,4 +40,14 @@ if [[ ! -z $running_containers ]]; then
             docker exec $container_id sh -c "ip link show | awk '/^[0-9]+: / {iface=\$2} /ether/ {print iface, \$2}'"
             # Assign IP address based on hostname
             if [[ $hostname == "router_mpagani-1" ]]; then
-                bash 
+                 # Copy configuration file to the container
+                docker cp $CONFIG_FILE_ROUTER_1 $container_id:/tmp/router.conf
+                # Execute the configuration file
+                docker exec $container_id vtysh -f /tmp/router.conf && echo -e "${GREEN}Success: Configured router $hostname${NC}" || echo "Error: Failed to configure router $hostname"
+            fi
+            ;;
+        esac
+    done
+else
+  echo "No running Docker containers found."
+fi
