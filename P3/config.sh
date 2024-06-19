@@ -8,6 +8,9 @@ YELLOW='\033[1;93m'
 NC='\033[0m' # No Color
 
 $CONFIG_FILE_ROUTER_1="router_1.conf"
+$CONFIG_FILE_ROUTER_2="router_2.conf"
+$CONFIG_FILE_ROUTER_3="router_3.conf"
+$CONFIG_FILE_ROUTER_4="router_4.conf"
 
 # Get the list of running Docker container IDs
 running_containers=$(docker ps -q)
@@ -42,6 +45,21 @@ if [[ ! -z $running_containers ]]; then
             if [[ $hostname == "router_mpagani-1" ]]; then
                  # Copy configuration file to the container
                 docker cp $CONFIG_FILE_ROUTER_1 $container_id:/tmp/router.conf
+                # Execute the configuration file
+                docker exec $container_id vtysh -f /tmp/router.conf && echo -e "${GREEN}Success: Configured router $hostname${NC}" || echo "Error: Failed to configure router $hostname"
+            elif [[ $hostname == "router_mpagani-2" ]]; then
+                 # Copy configuration file to the container
+                docker cp $CONFIG_FILE_ROUTER_2 $container_id:/tmp/router.conf
+                # Execute the configuration file
+                docker exec $container_id vtysh -f /tmp/router.conf && echo -e "${GREEN}Success: Configured router $hostname${NC}" || echo "Error: Failed to configure router $hostname"
+            elif [[ $hostname == "router_mpagani-3" ]]; then
+                 # Copy configuration file to the container
+                docker cp $CONFIG_FILE_ROUTER_3 $container_id:/tmp/router.conf
+                # Execute the configuration file
+                docker exec $container_id vtysh -f /tmp/router.conf && echo -e "${GREEN}Success: Configured router $hostname${NC}" || echo "Error: Failed to configure router $hostname"
+            elif [[ $hostname == "router_mpagani-4" ]]; then
+                 # Copy configuration file to the container
+                docker cp $CONFIG_FILE_ROUTER_4 $container_id:/tmp/router.conf
                 # Execute the configuration file
                 docker exec $container_id vtysh -f /tmp/router.conf && echo -e "${GREEN}Success: Configured router $hostname${NC}" || echo "Error: Failed to configure router $hostname"
             fi
