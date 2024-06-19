@@ -5,6 +5,7 @@
 ## Walkthrough
 - [P1](P1/setup.md)
 - [P2](P2/setup.md)
+- [P3](P3/setup.md)
 <br><br>
 
 ## Overview
