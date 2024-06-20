@@ -43,3 +43,7 @@
     - The Route Reflector (RR) is a component in the BGP (Border Gateway Protocol) that helps in reducing the number of BGP peer connections by reflecting routes between clients.
     - the RR is responsible for generating and distributing the Route Type 2 advertisements to other VTEPs (VXLAN Tunnel Endpoints) in the network.
 
+## Internet Service Providers
+- ISPs manage one or more ASes, providing connectivity to customers, including individuals, businesses, and other ISPs. They route data packets between different ASes across the internet.
+- ISPs use Border Gateway Protocol (BGP) to exchange routing information between ASes.
+- BGP enables ISPs to determine the best paths for data to travel across the complex web of networks that make up the internet.
