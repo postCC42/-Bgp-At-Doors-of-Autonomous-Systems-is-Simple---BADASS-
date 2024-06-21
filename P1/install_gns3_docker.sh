@@ -12,6 +12,12 @@ if ! command_exists gns3; then
     sudo add-apt-repository ppa:gns3/ppa
     sudo apt-get update
     sudo apt-get install -y gns3-gui gns3-server
+    sudo usermod -aG ubridge $USER
+    sudo usermod -aG libvirt $USER
+    sudo usermod -aG wireshark $USER
+    newgrp ubridge
+    newgrp libvirt
+    newgrp wireshark
 else
     echo "GNS3 is already installed."
 fi
