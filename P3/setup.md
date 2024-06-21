@@ -47,3 +47,32 @@
 - ISPs manage one or more ASes, providing connectivity to customers, including individuals, businesses, and other ISPs. They route data packets between different ASes across the internet.
 - ISPs use Border Gateway Protocol (BGP) to exchange routing information between ASes.
 - BGP enables ISPs to determine the best paths for data to travel across the complex web of networks that make up the internet.
+
+## useful cmds and how to read outputs
+- `do sh ip route`
+    - ouput example: `O>* 1.1.1.1/32 [110/10] via 10.1.1.9, eth2, weight 1, 00:01:05`
+    - Protocol: O: Indicates that the route is learned via OSPF.
+    - Route Selection Indicator: >* > indicates that this route is the currently selected route among OSPF-learned routes.
+    - Network Address: 1.1.1.1/32 : The destination network address with its subnet mask (/32).
+    - OSPF Metrics: [110/10]: 110 is the administrative distance of OSPF.
+    10 is the OSPF metric for this route.
+    - Next Hop: via 10.1.1.9. Specifies the IP address of the next hop router.
+    - Outgoing Interface: eth2, how to reach the next hop.
+    - Route Weight: weight 1: Weight assigned to this route within OSPF.
+    - Time: 00:01:05: Time elapsed since this route was last updated or refreshed.
+- `do sh bgp summary`
+    - Neighbor: Refers to the BGP neighbor router (in this case, 1.1.1.1).
+    - V: BGP protocol version (4 indicates BGP version 4).
+    - BGP table: Also known as the BGP routing table, it holds all the BGP-learned routes.
+    - RIB (Routing Information Base): It's the main database that stores routes learned from all routing protocols, including BGP.
+    - RIB entries: Number of routes currently stored in the BGP routing table.
+    - Memory usage: Amount of memory (in KiB) used by the BGP process to maintain routing information.
+    - State/PfxRcd: BGP session state and number of prefixes received from the neighbor.
+- `do sh bgp l2vpn evpn`: For each route distinguisher (RD), it shows the associated prefixes and their attributes.
+    -  "prefixes" refer to the network layer reachability information advertised and exchanged between BGP routers.
+        - example:
+            - Type-3 prefix ([3]:[0]:[32]:[1.1.1.2])
+            - Next hop is 1.1.1.2 with metric 0, Local Preference (LocPrf) 100, and Weight 0.
+            - Originated locally (i).
+        - NB for type-2 prefix we have just MAC address
+        - NB: Without explicitly assigning an IP address to the VTEP (Virtual Tunnel Endpoint), the VTEP is able to discover MAC addresses of functional machines (endpoints) in the network.
